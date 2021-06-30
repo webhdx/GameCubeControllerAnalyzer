@@ -1,16 +1,16 @@
-#ifndef GAMECUBECONTROLLER_ANALYZER_RESULTS
-#define GAMECUBECONTROLLER_ANALYZER_RESULTS
+#ifndef NINTENDO_ANALYZER_RESULTS
+#define NINTENDO_ANALYZER_RESULTS
 
 #include <AnalyzerResults.h>
 
-class GameCubeControllerAnalyzer;
-class GameCubeControllerAnalyzerSettings;
+class NintendoAnalyzer;
+class NintendoAnalyzerSettings;
 
-class GameCubeControllerAnalyzerResults : public AnalyzerResults {
+class NintendoAnalyzerResults : public AnalyzerResults {
   public:
-    GameCubeControllerAnalyzerResults(
-      GameCubeControllerAnalyzer* analyzer, GameCubeControllerAnalyzerSettings* settings);
-    virtual ~GameCubeControllerAnalyzerResults();
+    NintendoAnalyzerResults(
+      NintendoAnalyzer* analyzer, NintendoAnalyzerSettings* settings);
+    virtual ~NintendoAnalyzerResults();
 
     virtual void GenerateBubbleText(U64 frame_index, Channel& channel, DisplayBase display_base);
     virtual void
@@ -22,8 +22,8 @@ class GameCubeControllerAnalyzerResults : public AnalyzerResults {
 
   protected: // functions
   protected: // vars
-    GameCubeControllerAnalyzerSettings* mSettings;
-    GameCubeControllerAnalyzer* mAnalyzer;
+    NintendoAnalyzerSettings* mSettings;
+    NintendoAnalyzer* mAnalyzer;
 };
 
-#endif // GAMECUBECONTROLLER_ANALYZER_RESULTS
+#endif // NINTENDO_ANALYZER_RESULTS

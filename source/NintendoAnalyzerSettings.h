@@ -1,13 +1,13 @@
-#ifndef GAMECUBECONTROLLER_ANALYZER_SETTINGS
-#define GAMECUBECONTROLLER_ANALYZER_SETTINGS
+#ifndef NINTENDO_ANALYZER_SETTINGS
+#define NINTENDO_ANALYZER_SETTINGS
 
 #include <AnalyzerSettings.h>
 #include <AnalyzerTypes.h>
 
-class GameCubeControllerAnalyzerSettings : public AnalyzerSettings {
+class NintendoAnalyzerSettings : public AnalyzerSettings {
   public:
-    GameCubeControllerAnalyzerSettings();
-    virtual ~GameCubeControllerAnalyzerSettings();
+    NintendoAnalyzerSettings();
+    virtual ~NintendoAnalyzerSettings();
 
     virtual bool SetSettingsFromInterfaces();
     void UpdateInterfacesFromSettings();
@@ -21,4 +21,4 @@ class GameCubeControllerAnalyzerSettings : public AnalyzerSettings {
     std::auto_ptr<AnalyzerSettingInterfaceChannel> mInputChannelInterface;
 };
 
-#endif // GAMECUBECONTROLLER_ANALYZER_SETTINGS
+#endif // NINTENDO_ANALYZER_SETTINGS

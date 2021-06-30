@@ -1,26 +1,16 @@
-#ifndef GAMECUBECONTROLLER_ANALYZER_H
-#define GAMECUBECONTROLLER_ANALYZER_H
+#ifndef NINTENDO_ANALYZER_H
+#define NINTENDO_ANALYZER_H
 
-#include "GameCubeControllerAnalyzerResults.h"
-#include "GameCubeControllerSimulationDataGenerator.h"
+#include "NintendoAnalyzerResults.h"
+#include "NintendoSimulationDataGenerator.h"
 
 #include <Analyzer.h>
 
-class GameCubeControllerAnalyzerSettings;
-class ANALYZER_EXPORT GameCubeControllerAnalyzer : public Analyzer2 {
+class NintendoAnalyzerSettings;
+class ANALYZER_EXPORT NintendoAnalyzer : public Analyzer2 {
   public:
-    enum FrameType {
-        DATA,
-        CMD_ID,
-        CMD_STATUS,
-        CMD_ORIGIN,
-        CMD_RECALIBRATE,
-        CMD_STATUS_LONG,
-        ERROR,
-    };
-
-    GameCubeControllerAnalyzer();
-    virtual ~GameCubeControllerAnalyzer();
+    NintendoAnalyzer();
+    virtual ~NintendoAnalyzer();
 
     virtual void SetupResults();
     virtual void WorkerThread();
@@ -41,11 +31,11 @@ class ANALYZER_EXPORT GameCubeControllerAnalyzer : public Analyzer2 {
         U8 byte = 0x00;
     };
 
-    std::auto_ptr<GameCubeControllerAnalyzerSettings> mSettings;
-    std::auto_ptr<GameCubeControllerAnalyzerResults> mResults;
-    AnalyzerChannelData* mGamecube;
+    std::auto_ptr<NintendoAnalyzerSettings> mSettings;
+    std::auto_ptr<NintendoAnalyzerResults> mResults;
+    AnalyzerChannelData* mData;
 
-    GameCubeControllerSimulationDataGenerator mSimulationDataGenerator;
+    NintendoSimulationDataGenerator mSimulationDataGenerator;
     bool mSimulationInitilized;
 
     U32 mSampleRateHz;
@@ -54,11 +44,10 @@ class ANALYZER_EXPORT GameCubeControllerAnalyzer : public Analyzer2 {
 
     U64 GetPulseWidthNs(U64 start_edge, U64 end_edge);
     ByteDecodeStatus DecodeByte();
-    void DecodePacket(std::vector<Frame>& packet);
 };
 
 extern "C" ANALYZER_EXPORT const char* __cdecl GetAnalyzerName();
 extern "C" ANALYZER_EXPORT Analyzer* __cdecl CreateAnalyzer();
 extern "C" ANALYZER_EXPORT void __cdecl DestroyAnalyzer(Analyzer* analyzer);
 
-#endif // GAMECUBECONTROLLER_ANALYZER_H
+#endif // NINTENDO_ANALYZER_H

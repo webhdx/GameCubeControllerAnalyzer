@@ -1,11 +1,10 @@
-#include "GameCubeControllerAnalyzerSettings.h"
+#include "NintendoAnalyzerSettings.h"
 
 #include <AnalyzerHelpers.h>
 
-GameCubeControllerAnalyzerSettings::GameCubeControllerAnalyzerSettings() :
-    mInputChannel(UNDEFINED_CHANNEL) {
+NintendoAnalyzerSettings::NintendoAnalyzerSettings() : mInputChannel(UNDEFINED_CHANNEL) {
     mInputChannelInterface.reset(new AnalyzerSettingInterfaceChannel());
-    mInputChannelInterface->SetTitleAndTooltip("Data", "GameCube controller data line");
+    mInputChannelInterface->SetTitleAndTooltip("Data", "Nintendo controller data line");
     mInputChannelInterface->SetChannel(mInputChannel);
 
     AddInterface(mInputChannelInterface.get());
@@ -18,35 +17,35 @@ GameCubeControllerAnalyzerSettings::GameCubeControllerAnalyzerSettings() :
     AddChannel(mInputChannel, "Serial", false);
 }
 
-GameCubeControllerAnalyzerSettings::~GameCubeControllerAnalyzerSettings() {
+NintendoAnalyzerSettings::~NintendoAnalyzerSettings() {
 }
 
-bool GameCubeControllerAnalyzerSettings::SetSettingsFromInterfaces() {
+bool NintendoAnalyzerSettings::SetSettingsFromInterfaces() {
     mInputChannel = mInputChannelInterface->GetChannel();
 
     ClearChannels();
-    AddChannel(mInputChannel, "GameCube", true);
+    AddChannel(mInputChannel, "Nintendo", true);
 
     return true;
 }
 
-void GameCubeControllerAnalyzerSettings::UpdateInterfacesFromSettings() {
+void NintendoAnalyzerSettings::UpdateInterfacesFromSettings() {
     mInputChannelInterface->SetChannel(mInputChannel);
 }
 
-void GameCubeControllerAnalyzerSettings::LoadSettings(const char* settings) {
+void NintendoAnalyzerSettings::LoadSettings(const char* settings) {
     SimpleArchive text_archive;
     text_archive.SetString(settings);
 
     text_archive >> mInputChannel;
 
     ClearChannels();
-    AddChannel(mInputChannel, "GameCube", true);
+    AddChannel(mInputChannel, "Nintendo", true);
 
     UpdateInterfacesFromSettings();
 }
 
-const char* GameCubeControllerAnalyzerSettings::SaveSettings() {
+const char* NintendoAnalyzerSettings::SaveSettings() {
     SimpleArchive text_archive;
 
     text_archive << mInputChannel;

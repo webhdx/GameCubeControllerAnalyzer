@@ -1,27 +1,27 @@
-#ifndef GAMECUBECONTROLLER_SIMULATION_DATA_GENERATOR
-#define GAMECUBECONTROLLER_SIMULATION_DATA_GENERATOR
+#ifndef NINTENDO_SIMULATION_DATA_GENERATOR
+#define NINTENDO_SIMULATION_DATA_GENERATOR
 
 #include <SimulationChannelDescriptor.h>
 #include <string>
-class GameCubeControllerAnalyzerSettings;
+class NintendoAnalyzerSettings;
 
-class GameCubeControllerSimulationDataGenerator {
+class NintendoSimulationDataGenerator {
   public:
-    GameCubeControllerSimulationDataGenerator();
-    ~GameCubeControllerSimulationDataGenerator();
+    NintendoSimulationDataGenerator();
+    ~NintendoSimulationDataGenerator();
 
-    void Initialize(U32 simulation_sample_rate, GameCubeControllerAnalyzerSettings* settings);
+    void Initialize(U32 simulation_sample_rate, NintendoAnalyzerSettings* settings);
     U32 GenerateSimulationData(
       U64 newest_sample_requested,
       U32 sample_rate,
       SimulationChannelDescriptor** simulation_channel);
 
   protected:
-    GameCubeControllerAnalyzerSettings* mSettings;
+    NintendoAnalyzerSettings* mSettings;
     U32 mSimulationSampleRateHz;
 
   protected:
-    enum class GamecubeGenerationState {
+    enum class NintendoGenerationState {
         IdCmd,
         IdResp,
         OriginCmd,
@@ -55,10 +55,10 @@ class GameCubeControllerSimulationDataGenerator {
 
     void RunStateMachine();
 
-    GamecubeGenerationState mGamecubeGenerationState, mGamecubeGenerationLastState;
+    NintendoGenerationState mNintendoGenerationState, mNintendoGenerationLastState;
     int mIdCmds = ID_CMDS;
     int mPollCmds = POLL_CMDS;
 
-    SimulationChannelDescriptor mGamecubeSimulationData;
+    SimulationChannelDescriptor mNintendoSimulationData;
 };
-#endif // GAMECUBECONTROLLER_SIMULATION_DATA_GENERATOR
+#endif // NINTENDO_SIMULATION_DATA_GENERATOR

@@ -1,6 +1,6 @@
-# Saleae Logic GameCube Controller Analyzer
-GameCube controller analyzer for Saleae Logic software.
+# Saleae Logic Nintendo Controller Analyzer
+N64/GameCube controller analyzer for Saleae Logic software.
 
 To build: `python build_analyzer.py`
 
-![GameCube Controller Analyzer](/analyzer.png)
+![Nintendo Controller Analyzer](/analyzer.png)

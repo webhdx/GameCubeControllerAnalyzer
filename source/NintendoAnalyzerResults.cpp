@@ -1,22 +1,22 @@
-#include "GameCubeControllerAnalyzerResults.h"
+#include "NintendoAnalyzerResults.h"
 
-#include "GameCubeControllerAnalyzer.h"
-#include "GameCubeControllerAnalyzerSettings.h"
+#include "NintendoAnalyzer.h"
+#include "NintendoAnalyzerSettings.h"
 
 #include <AnalyzerHelpers.h>
 #include <fstream>
 #include <iostream>
 
-GameCubeControllerAnalyzerResults::GameCubeControllerAnalyzerResults(
-  GameCubeControllerAnalyzer* analyzer, GameCubeControllerAnalyzerSettings* settings) :
+NintendoAnalyzerResults::NintendoAnalyzerResults(
+  NintendoAnalyzer* analyzer, NintendoAnalyzerSettings* settings) :
     AnalyzerResults(),
     mSettings(settings), mAnalyzer(analyzer) {
 }
 
-GameCubeControllerAnalyzerResults::~GameCubeControllerAnalyzerResults() {
+NintendoAnalyzerResults::~NintendoAnalyzerResults() {
 }
 
-void GameCubeControllerAnalyzerResults::GenerateBubbleText(
+void NintendoAnalyzerResults::GenerateBubbleText(
   U64 frame_index, Channel& channel, DisplayBase display_base) {
     ClearResultStrings();
     Frame frame = GetFrame(frame_index);
@@ -26,39 +26,14 @@ void GameCubeControllerAnalyzerResults::GenerateBubbleText(
     if (!error) {
         char number_str[128];
         AnalyzerHelpers::GetNumberString(frame.mData1, display_base, 8, number_str, 128);
-
-        switch (frame.mType) {
-            case GameCubeControllerAnalyzer::CMD_ID:
-                AddResultString("ID: ", number_str);
-                break;
-
-            case GameCubeControllerAnalyzer::CMD_STATUS:
-                AddResultString("Status: ", number_str);
-                break;
-
-            case GameCubeControllerAnalyzer::CMD_ORIGIN:
-                AddResultString("Origin: ", number_str);
-                break;
-
-            case GameCubeControllerAnalyzer::CMD_RECALIBRATE:
-                AddResultString("Recalibrate: ", number_str);
-                break;
-
-            case GameCubeControllerAnalyzer::CMD_STATUS_LONG:
-                AddResultString("Status Long: ", number_str);
-                break;
-
-            default:
-                AddResultString(number_str);
-                break;
-        }
+        AddResultString(number_str);
     } else {
         // This is not really worth enabling unless you can change the color
         AddResultString("ERROR: Invalid frame");
     }
 }
 
-void GameCubeControllerAnalyzerResults::GenerateExportFile(
+void NintendoAnalyzerResults::GenerateExportFile(
   const char* file, DisplayBase display_base, U32 export_type_user_id) {
     std::ofstream file_stream(file, std::ios::out);
 
@@ -89,8 +64,7 @@ void GameCubeControllerAnalyzerResults::GenerateExportFile(
     file_stream.close();
 }
 
-void GameCubeControllerAnalyzerResults::GenerateFrameTabularText(
-  U64 frame_index, DisplayBase display_base) {
+void NintendoAnalyzerResults::GenerateFrameTabularText(U64 frame_index, DisplayBase display_base) {
 #ifdef SUPPORTS_PROTOCOL_SEARCH
     Frame frame = GetFrame(frame_index);
     ClearTabularText();
@@ -101,12 +75,11 @@ void GameCubeControllerAnalyzerResults::GenerateFrameTabularText(
 #endif
 }
 
-void GameCubeControllerAnalyzerResults::GeneratePacketTabularText(
-  U64 packet_id, DisplayBase display_base) {
+void NintendoAnalyzerResults::GeneratePacketTabularText(U64 packet_id, DisplayBase display_base) {
     // not supported
 }
 
-void GameCubeControllerAnalyzerResults::GenerateTransactionTabularText(
+void NintendoAnalyzerResults::GenerateTransactionTabularText(
   U64 transaction_id, DisplayBase display_base) {
     // not supported
 }
